@@ -1,1 +1,1 @@
-require('./src/BankAccount');
+console.log('adsf');
