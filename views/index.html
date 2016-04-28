@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+  <title>FitBank</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Eating like an investor">
+  <meta name="author" content="Cody Romano">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+</head>
+<body>
+<main>
+  <div class="center-col">
+    <h1>FitBank</h1>
+  </div>
+  <div class="stat-wrapper center-col">
+    <span class="stat" id="calories"></span>
+    <span class="stat-label">Calories Available</span>
+  </div>
+
+  <div class="center-col">
+    <span class="btn primary" onClick="requestReward()">Claim Daily Calories</span>
+    <span class="btn primary" onClick="spendCalories()">Report Calories Spent</span>
+    <!--<span class="btn secondary" onClick="reset()">Reset</span>-->
+    <!--
+    <span class="btn secondary" onClick="setDailyCalorieLimit()">Update Settings</span>
+    <span class="btn secondary" onClick="reset()">Reset</span>
+  -->
+  </div>
+</main>
+
+<script>
+var Db = {
+  save: function(key, value) {
+    localStorage.setItem(key, value);
+  },
+  get: function(key) {
+    return localStorage.getItem(key);
+  }
+};
+
+var Reward = {
+  defaultAmount: 1200,
+  getRewardAmount: function() {
+    var amount = parseFloat(Db.get('rewardAmount')); 
+    return (isNaN(amount)) ? this.defaultAmount : amount;
+  },
+  setRewardAmount: function(amount) {
+    Db.save('rewardAmount', amount); 
+  },
+  dateLastClaimed: Db.get('dateLastClaimed') || null,
+  getCurrentDate: function() {
+    var date = new Date();
+    return [date.getMonth(), date.getDay(), date.getFullYear()].join('/');
+  },
+  isEligible: function() {
+    return (this.getCurrentDate() !== this.dateLastClaimed);
+  },
+  claim: function(balance) {
+    this.dateLastClaimed = this.getCurrentDate(); 
+    Db.save('dateLastClaimed', this.dateLastClaimed);
+    balance.add(this.getRewardAmount()); 
+  }
+};
+
+var Balance = {
+  el: document.getElementById('calories'), 
+  maxDebt: -(Reward.getRewardAmount() * 2),
+  add: function(amount) {
+    var current = parseFloat(this.get()); 
+    this.set(current + amount); 
+  },
+  deduct: function(amount) {
+    var current = parseFloat(this.get()),
+        newBalance = Math.max(this.maxDebt, current - amount); 
+    this.set(newBalance);
+  },
+  set: function(amount) {
+    Db.save('balance', amount); 
+    this.render();
+  },
+  get: function() {
+    var amount = Db.get('balance') || 0; 
+    return amount; 
+  },
+  addCommas: function(number) {
+    return (number + '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+  },
+  render: function() {
+    this.el.innerText = this.addCommas(this.get()); 
+  }
+};
+
+Balance.render();
+
+function reset() {
+  var confirm = window.confirm("Really want to reset?");
+  if (confirm) {
+    Balance.set(0); 
+    Reward.dateLastClaimed = null;
+    localStorage.setItem('dateLastClaimed', null);
+    localStorage.setItem('rewardAmount', Reward.defaultAmount);
+    Balance.render();
+  }
+}
+
+function setDailyCalorieLimit() {
+  var limit = window.prompt('How many calories should you consume per day?',
+    Reward.getRewardAmount());
+
+  if (!isNaN(limit) && limit > 0) {
+    Reward.setRewardAmount(limit);
+  }
+}
+
+function spendCalories() {
+  var spent = window.prompt('How many calories did you consume?');
+  if (!isNaN(spent) && spent > 0) {
+    Balance.deduct(spent);
+  } 
+}
+
+function requestReward() {
+  if (!Reward.isEligible()) {
+    alert('You have claimed your calories for today. Come back tomorrow.');
+    return;
+  }
+  Reward.claim(Balance); 
+}
+</script>

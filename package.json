@@ -1,0 +1,29 @@
+{
+  "name": "fit-bank",
+  "version": "1.0.0",
+  "description": "A web app for managing calorie intake",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codyromano/fit-bank.git"
+  },
+  "keywords": [
+    "finance",
+    "fitness",
+    "productivity",
+    "health"
+  ],
+  "author": "Cody Romano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codyromano/fit-bank/issues"
+  },
+  "homepage": "https://github.com/codyromano/fit-bank#readme",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4"
+  }
+}
