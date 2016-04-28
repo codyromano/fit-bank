@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Cash';
+  src: url(cash.woff2);
+}
+main {
+  font-family: Cash, Helvetica;
+}
+body {
+  background-color: #22a301;
+}
+main {
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+}
+h1 {
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+.stat-wrapper {
+  padding: 1.5em .5em 2em .5em;
+  margin: 1rem 0;
+}
+.stat {
+  font-size: 4em;
+  display: block;
+}
+.btn {
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+.primary, .secondary {
+  display: inline-block;
+  padding: 1em 1.5em;
+  border-radius: .5em;
+  margin: .5em 1em .5em 0;
+}
+.primary {
+  background-color: #3cd428;
+}
+.secondary {
+  background-color: #bfbfbf;
+
+}
+.settings {
+  color: #eff;
+}
+.center-col {
+  max-width: 40rem;
+  margin: 0 auto;
+}
