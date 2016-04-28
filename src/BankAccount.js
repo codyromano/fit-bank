@@ -48,3 +48,5 @@ class BankAccount {
     return true;
   }
 }
+
+module.exports = BankAccount;
