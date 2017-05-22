@@ -119,7 +119,7 @@ function loadContent(contentName) {
   $(`.page-container`).load(`/content/${contentName}.html`);
 }
 
-$(window).bind('load', event => {
+$(window).bind('hashchange', event => {
   loadContent(window.location.hash.replace('#',''));
 });
 
