@@ -15,15 +15,8 @@
   <header class="center-col">
     <h1>FitBank</h1>
   </header>
-  <div class="stat-wrapper center-col">
-    <span class="stat" id="calories"></span>
-    <span class="stat-label">Calories Available</span>
-  </div>
 
-  <div class="center-col">
-    <span class="btn primary" onClick="requestReward()">Claim Daily Calories</span>
-    <span class="btn primary" onClick="spendCalories()">Report Calories Spent</span>
-  </div>
+  <section class="page-container"></section>
 
   <button class="settings-icon" onClick="toggleSettingsMenu(true)"></button>
   <div class="settings-wrapper">
@@ -34,12 +27,16 @@
     </div>
   </div>
   <footer class="nav-footer">
-    <button id="earn" onClick="alert('Coming soon')">Earn</button>
-    <button id="spend" onClick="alert('Coming soon')">Spend</button>
-    <button id="invest" onClick="alert('Coming soon')">Invest</button>
+    <button id="earn">Earn</button>
+    <button id="spend">Spend</button>
+    <button id="invest">Invest</button>
   </footer>
 </main>
 
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 <script>
 function toggleSettingsMenu(show) {
   const settings = document.querySelector('.settings-wrapper');
@@ -83,36 +80,6 @@ var Reward = {
   }
 };
 
-var Balance = {
-  el: document.getElementById('calories'), 
-  maxDebt: -(Reward.getRewardAmount() * 2),
-  add: function(amount) {
-    var current = parseFloat(this.get()); 
-    this.set(current + amount); 
-  },
-  deduct: function(amount) {
-    var current = parseFloat(this.get()),
-        newBalance = Math.max(this.maxDebt, current - amount); 
-    this.set(newBalance);
-  },
-  set: function(amount) {
-    Db.save('balance', amount); 
-    this.render();
-  },
-  get: function() {
-    var amount = Db.get('balance') || 0; 
-    return amount; 
-  },
-  addCommas: function(number) {
-    return (number + '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-  },
-  render: function() {
-    this.el.innerText = this.addCommas(this.get()); 
-  }
-};
-
-Balance.render();
-
 function reset() {
   var confirm = window.confirm("Really want to reset?");
   if (confirm) {
@@ -147,6 +114,21 @@ function requestReward() {
   }
   Reward.claim(Balance); 
 }
+
+function loadContent(contentName) {
+  $(`.page-container`).load(`/content/${contentName}.html`);
+}
+
+$(window).bind('load', event => {
+  loadContent(window.location.hash.replace('#',''));
+});
+
+loadContent(window.location.hash.replace('#',''));
+
+$('.nav-footer button').click(function() {
+  const contentName = $(this).attr('id');
+  window.location.hash = contentName;
+});
 </script>
 
 <script src="/js/webpack-bundle.js"></script>
