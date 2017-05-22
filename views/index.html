@@ -7,6 +7,7 @@
   <meta name="author" content="Cody Romano">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/settings.css" type="text/css"/>
 </head>
 <body>
 <main>
@@ -21,15 +22,28 @@
   <div class="center-col">
     <span class="btn primary" onClick="requestReward()">Claim Daily Calories</span>
     <span class="btn primary" onClick="spendCalories()">Report Calories Spent</span>
-    <!--<span class="btn secondary" onClick="reset()">Reset</span>-->
-    <!--
-    <span class="btn secondary" onClick="setDailyCalorieLimit()">Update Settings</span>
-    <span class="btn secondary" onClick="reset()">Reset</span>
-  -->
+  </div>
+
+  <button class="settings-icon" onClick="toggleSettingsMenu(true)"></button>
+  <div class="settings-wrapper">
+    <div class="settings">
+      <span class="btn primary" onClick="setDailyCalorieLimit()">Update Daily Calories</span>
+      <span class="btn primary" onClick="reset()">Reset</span>
+      <span class="btn secondary" onClick="toggleSettingsMenu(false)">Close</span>
+    </div>
   </div>
 </main>
 
 <script>
+function toggleSettingsMenu(show) {
+  const settings = document.querySelector('.settings-wrapper');
+  if (show) {
+    settings.classList.add('showing');
+  } else {
+    settings.classList.remove('showing');
+  }
+}
+
 var Db = {
   save: function(key, value) {
     localStorage.setItem(key, value);

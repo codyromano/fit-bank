@@ -41,7 +41,6 @@ h1 {
 }
 .secondary {
   background-color: #bfbfbf;
-
 }
 .settings {
   color: #eff;
@@ -49,4 +48,10 @@ h1 {
 .center-col {
   max-width: 40rem;
   margin: 0 auto;
+}
+button {
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
 }
