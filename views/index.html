@@ -40,7 +40,7 @@ var Db = {
 };
 
 var Reward = {
-  defaultAmount: 1200,
+  defaultAmount: 1000,
   getRewardAmount: function() {
     var amount = parseFloat(Db.get('rewardAmount')); 
     return (isNaN(amount)) ? this.defaultAmount : amount;
