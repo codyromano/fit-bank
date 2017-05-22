@@ -30,10 +30,11 @@ h1 {
   -webkit-user-select: none;
 }
 .primary, .secondary {
-  display: inline-block;
+  display: block;
   padding: 1em 1.5em;
   border-radius: .5em;
-  margin: .5em 1em .5em 0;
+  margin: .5em auto;
+  max-width: 15rem;
 }
 .primary {
   background-color: #3cd428;
