@@ -8,12 +8,13 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
   <link rel="stylesheet" href="./styles/settings.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/nav-footer.css" type="text/css"/>
 </head>
 <body>
 <main>
-  <div class="center-col">
+  <header class="center-col">
     <h1>FitBank</h1>
-  </div>
+  </header>
   <div class="stat-wrapper center-col">
     <span class="stat" id="calories"></span>
     <span class="stat-label">Calories Available</span>
@@ -32,6 +33,11 @@
       <span class="btn secondary" onClick="toggleSettingsMenu(false)">Close</span>
     </div>
   </div>
+  <footer class="nav-footer">
+    <button id="earn" onClick="alert('Coming soon')">Earn</button>
+    <button id="spend" onClick="alert('Coming soon')">Spend</button>
+    <button id="invest" onClick="alert('Coming soon')">Invest</button>
+  </footer>
 </main>
 
 <script>
