@@ -1,4 +1,4 @@
-const SERVER_PORT = 3000;
+const SERVER_PORT = 3456;
 
 var express = require('express');
 var app = express();
