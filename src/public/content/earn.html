@@ -4,37 +4,9 @@
 </div>
 
 <div class="center-col">
-  <span class="btn primary" onClick="requestReward()">Claim Daily Calories</span>
-  <span class="btn primary" onClick="spendCalories()">Report Calories Spent</span>
+  <span class="btn primary daily-reward" onClick="requestReward()">Claim Daily Reward</span>
 </div>
 
 <script>
-var Balance = {
-  el: document.getElementById('calories'), 
-  maxDebt: -(Reward.getRewardAmount() * 2),
-  add: function(amount) {
-    var current = parseFloat(this.get()); 
-    this.set(current + amount); 
-  },
-  deduct: function(amount) {
-    var current = parseFloat(this.get()),
-        newBalance = Math.max(this.maxDebt, current - amount); 
-    this.set(newBalance);
-  },
-  set: function(amount) {
-    Db.save('balance', amount); 
-    this.render();
-  },
-  get: function() {
-    var amount = Db.get('balance') || 0; 
-    return amount; 
-  },
-  addCommas: function(number) {
-    return (number + '').replace(/(\d)(?=(\d{3})+$)/g, '$1,');
-  },
-  render: function() {
-    this.el.innerText = this.addCommas(this.get()); 
-  }
-};
 Balance.render();
 </script>

@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="./styles/data-table.css" type="text/css"/>
 </head>
 <body>
+
+<canvas class="confetti" id="world"></canvas>
+
 <main>
   <header class="center-col">
     <h1>FitBank</h1>
@@ -22,13 +25,13 @@
   <button class="settings-icon" onClick="toggleSettingsMenu(true)"></button>
   <div class="settings-wrapper">
     <div class="settings">
-      <span class="btn primary" onClick="setDailyCalorieLimit()">Update Daily Calories</span>
+      <span class="btn primary" onClick="setDailyCalorieLimit()">Change reward amount</span>
       <span class="btn primary" onClick="reset()">Reset</span>
       <span class="btn secondary" onClick="toggleSettingsMenu(false)">Close</span>
     </div>
   </div>
   <footer class="nav-footer">
-    <button id="earn">Earn</button>
+    <button id="earn">Rewards</button>
     <button id="spend">Spend</button>
     <button id="invest">Invest</button>
   </footer>
@@ -42,6 +45,14 @@
 <script src="./Db.js"></script>
 <script src="./Stock.js"></script>
 <script src="./StockFactory.js"></script>
+<script src="./Reward.js"></script>
+<script src="./Balance.js"></script>
+
+<script src="./confetti.js"></script>
+
+<script>
+Balance.render();
+</script>
 
 <script>
 function renderStocks() {
@@ -57,30 +68,6 @@ function toggleSettingsMenu(show) {
     settings.classList.remove('showing');
   }
 }
-
-var Reward = {
-  defaultAmount: 1000,
-  getRewardAmount: function() {
-    var amount = parseFloat(Db.get('rewardAmount')); 
-    return (isNaN(amount)) ? this.defaultAmount : amount;
-  },
-  setRewardAmount: function(amount) {
-    Db.save('rewardAmount', amount); 
-  },
-  dateLastClaimed: Db.get('dateLastClaimed') || null,
-  getCurrentDate: function() {
-    var date = new Date();
-    return [date.getMonth(), date.getDay(), date.getFullYear()].join('/');
-  },
-  isEligible: function() {
-    return (this.getCurrentDate() !== this.dateLastClaimed);
-  },
-  claim: function(balance) {
-    this.dateLastClaimed = this.getCurrentDate(); 
-    Db.save('dateLastClaimed', this.dateLastClaimed);
-    balance.add(this.getRewardAmount()); 
-  }
-};
 
 function reset() {
   var confirm = window.confirm("Really want to reset?");
@@ -110,11 +97,12 @@ function spendCalories() {
 }
 
 function requestReward() {
-  if (!Reward.isEligible()) {
+  if (Reward.isEligible()) {
+    toggleConfetti();
+    Reward.claim(Balance);
+  } else {
     alert('You have claimed your calories for today. Come back tomorrow.');
-    return;
   }
-  Reward.claim(Balance); 
 }
 
 function loadContent(contentName) {

@@ -55,3 +55,28 @@ button {
   border: none;
   background-color: transparent;
 }
+.daily-reward {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity ease 1s;
+}
+.confetti.hidden {
+  opacity: 0;
+}
