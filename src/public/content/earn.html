@@ -4,9 +4,22 @@
 </div>
 
 <div class="center-col">
-  <span class="btn primary daily-reward" onClick="requestReward()">Claim Daily Reward</span>
+  <span class="btn primary earn-button daily-reward" onClick="requestReward()">Claim Daily Reward</span>
 </div>
 
 <script>
+function renderRewardBtn(Reward) {
+  const btn = document.querySelector('.earn-button');
+
+  if (Reward.isEligible()) {
+    btn.classList.add('daily-reward');
+  } else {
+    btn.classList.remove('daily-reward');
+  }
+}
+
+$('.earn-button').click(() => renderRewardBtn(Reward));
+
+renderRewardBtn(Reward);
 Balance.render();
 </script>
