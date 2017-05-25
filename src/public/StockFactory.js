@@ -1,5 +1,12 @@
 (function(exports) {
-  function generateStocks(minPrice, maxPrice) {
+  const randInt = (min, max) => {
+    const range = max - min;
+    return Math.round(
+      min + Math.random() * range
+    );
+  };
+
+  function generateStocks({minPrice, maxPrice}) {
     const symbols = [
       'Amazon',
       'Google',
@@ -23,7 +30,10 @@
   function StockFactory() {
     let stocks = Db.get('stocks');
     if (typeof stocks !== 'object' || stocks === null) {
-      stocks = generateStocks();
+      stocks = generateStocks({
+        minPrice: 100,
+        maxPrice: 1000
+      });
     }
 
     stocks.forEach(stock => {
