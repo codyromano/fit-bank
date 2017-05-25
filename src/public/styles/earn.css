@@ -1,0 +1,41 @@
+.earn-button {
+  opacity: 0.75;
+  transition: transform ease 2s;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: default;
+}
+.daily-reward {
+  point-events: default;
+  opacity: 1;
+  cursor: pointer;
+}
+.daily-reward {
+  opacity: 1;
+  background-color: #3cd428;
+  border: solid #3cd428 0.1rem;
+  border: none;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity ease 1s;
+}
+.confetti.hidden {
+  opacity: 0;
+  z-index: -1;
+}
