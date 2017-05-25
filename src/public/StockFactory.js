@@ -17,18 +17,20 @@
       'ExxonMobil'
     ].sort();
 
-    const stocks = symbols.map(symbol =>
-      new Stock({
+    const stocks = symbols.map(symbol => {
+      return {
         symbol,
-        price: randInt(minPrice, maxPrice)
-      })
-    );
+        price: randInt(minPrice, maxPrice),
+        lastUpdate: new Date().getTime()
+      };
+    });
 
     return stocks;
   }
 
   function StockFactory() {
     let stocks = Db.get('stocks');
+
     if (typeof stocks !== 'object' || stocks === null) {
       stocks = generateStocks({
         minPrice: 100,
@@ -36,16 +38,19 @@
       });
     }
 
+    const stockInstances = stocks.map(stock =>
+      new Stock(stock));
+
     let pricesChanged = false;
-    stocks.forEach(stock => {
-      if (stock.shouldUpdatePrice()) {
-        stock.updatePrice();
+    stockInstances.forEach(stockObj => {
+      if (stockObj.shouldUpdatePrice()) {
+        stockObj.updatePrice();
         pricesChanged = true;
       }
     });
 
-    if (pricesChanged) {
-      Db.save('stocks', stocks);
+    if (!Db.save('stocks', stockInstances)) {
+      throw new Error(`Could not save stocks`);
     }
 
     return stocks;

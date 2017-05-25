@@ -1,24 +1,27 @@
 const chance = odds => Math.random() >= odds;
 
-const defaultProps = {
-  symbol: 'AMZN',
-  price: 950,
-  lastUpdate: null,
-  // Every 3 hours
-  updateFreq: 1000 * 60 * 60 * 3,
-  riskProfile: {
-    // Probability => price percentage change
-    // E.g. 25% chance of a 10% price drop
-    '.25': -0.10,
-    '.25': -0.5,
-    '.25': 0.5,
-    '.25': 0.25
-  }
+const getDefaultProps = () => {
+  return {
+    symbol: 'AMZN',
+    price: 950,
+    lastUpdate: null,
+    // Every 30 minutes
+    updateFreq: 1000 * 60 * 30,
+    updateFreq: 5,
+    riskProfile: {
+      // Probability => price percentage change
+      // E.g. 25% chance of a 10% price drop
+      '.25': -0.10,
+      '.25': -0.5,
+      '.25': 0.5,
+      '.25': 0.25
+    }
+  };
 };
 
 class Stock {
   constructor(props = defaultProps) {
-    Object.assign(this, props);
+    Object.assign(this, getDefaultProps(), props);
   }
   timeSinceUpdate() {
     if (Number.isInteger(this.lastUpdate)) {
@@ -36,11 +39,10 @@ class Stock {
 
         // The price can't drop below one
         this.price = Math.max(1, newPrice);
-        this.lastUpdate = new Date().getTime();
-
         return this.price;
       }
     }
+    this.lastUpdate = new Date().getTime();
     return this.price;
   }
 }
