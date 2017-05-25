@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
   <link rel="stylesheet" href="./styles/settings.css" type="text/css"/>
   <link rel="stylesheet" href="./styles/nav-footer.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/data-table.css" type="text/css"/>
 </head>
 <body>
 <main>
@@ -43,9 +44,10 @@
 <script src="./StockFactory.js"></script>
 
 <script>
-const stocks = StockFactory();
-
-console.log(stocks[0]);
+function renderStocks() {
+  const stocks = StockFactory();
+  console.log(stocks);
+}
 
 function toggleSettingsMenu(show) {
   const settings = document.querySelector('.settings-wrapper');
@@ -116,7 +118,11 @@ function requestReward() {
 }
 
 function loadContent(contentName) {
-  $(`.page-container`).load(`/content/${contentName}.html`);
+  $(`.page-container`).load(`/content/${contentName}.html`, () => {
+    if (contentName === 'invest') {
+      renderStocks();
+    }
+  });
 }
 
 $(window).bind('hashchange', event => {
