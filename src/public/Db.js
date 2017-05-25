@@ -1,12 +1,38 @@
+const Constants = {
+  savedObject: 1,
+  savedString: 2,
+  saveFailed: 3
+};
+
 var Db = {
-  //objectFlag: '_flag',
-  saveObject: function(key, value) {
-    localStorage.setItem()
+  objFlag: 'isObject',
+  save(key, value) {
+    const {
+      savedObject,
+      savedString,
+      saveFailed
+    } = Constants;
+
+    if (typeof value === 'object' && value !== null) {
+      localStorage.setItem(`${key}_${this.objFlag}`,
+        JSON.stringify(value));
+      return savedObject;
+    } else {
+      localStorage.setItem(`${key}`, value);
+      return savedString;
+    }
+    return saveFailed;
   },
-  save: function(key, value) {
-    localStorage.setItem(key, value);
-  },
-  get: function(key) {
-    return localStorage.getItem(key);
+  get(key) {
+    const objectValue = localStorage.getItem(
+      `${key}_${this.objFlag}`
+    );
+    if (objectValue) {
+      return JSON.parse(objectValue);
+    }
+    const stringValue = localStorage.getItem(
+      `${key}`
+    );
+    return stringValue;
   }
 };

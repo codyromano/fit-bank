@@ -54,15 +54,6 @@ function toggleSettingsMenu(show) {
   }
 }
 
-var Db = {
-  save: function(key, value) {
-    localStorage.setItem(key, value);
-  },
-  get: function(key) {
-    return localStorage.getItem(key);
-  }
-};
-
 var Reward = {
   defaultAmount: 1000,
   getRewardAmount: function() {
