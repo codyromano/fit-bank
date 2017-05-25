@@ -36,11 +36,17 @@
       });
     }
 
+    let pricesChanged = false;
     stocks.forEach(stock => {
       if (stock.shouldUpdatePrice()) {
         stock.updatePrice();
+        pricesChanged = true;
       }
     });
+
+    if (pricesChanged) {
+      Db.save('stocks', stocks);
+    }
 
     return stocks;
   }
