@@ -35,7 +35,7 @@
   opacity: 1;
   transition: opacity ease 1s;
 }
-.confetti.hidden {
+.confetti.invisible {
   opacity: 0;
   z-index: -1;
 }
