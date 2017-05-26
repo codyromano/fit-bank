@@ -1,12 +1,79 @@
-<div class="stat-wrapper center-col">
-  <span class="stat" id="calories"></span>
-  <span class="stat-label">Calories Available</span>
-</div>
+<section class="spend-page center-col">
+  <h2 class="spend-headline">What did you eat?</h2>
 
-<div class="center-col">
-  <span class="btn primary" onClick="spendCalories()">Report Calories Spent</span>
-</div>
+  <div class="row meal-options row-centered-items">
+    <span class="btn primary btn-width-50">Breakfast</span>
+    <span class="btn primary btn-width-50">Lunch</span>
+    <span class="btn primary btn-width-50">Dinner</span>
+    <span class="btn primary btn-width-50">Snack</span>
+  </div>
+
+  <div class="calories hidden">
+    <div class="row row-centered-items">
+      <div class="input-wrapper">
+        <input type="number" class="calorie-input">
+      </div>
+    </div>
+    <div>
+      <span class="btn secondary cancel">Cancel</span>
+      <span class="btn primary log-button">Log</span>
+    </div>
+  </div>
+</section>
 
 <script>
 Balance.render();
+
+function renderSpendPage(state = {}) {
+  const $mealOptions = $('.meal-options');
+  const $calories = $('.calories');
+  const $headline = $('.spend-headline');
+
+  const fadeInTime = 1000 / 3;
+
+  if (state.mealType && state.mealType.length) {
+    $mealOptions.fadeOut(fadeInTime);
+    setTimeout(() => {
+      $calories.fadeIn(fadeInTime);
+      $headline.text(`How many calories?`);
+      $('.calorie-input').focus();
+      $('.log-button').text(`Log ${state.mealType}`);
+    }, fadeInTime);
+  } else {
+
+    $calories.fadeOut(fadeInTime);
+    setTimeout(() => {
+      $mealOptions.fadeIn(fadeInTime);
+      $headline.text(`What did you eat?`);
+    }, fadeInTime);
+  }
+}
+
+$(() => {
+  $('.spend-page').on('click', '.meal-options .btn', function() {
+    renderSpendPage({
+      mealType: $(this).text()
+    });
+  });
+
+  $('.spend-page').on('click', '.cancel', function() {
+    renderSpendPage({
+      mealType: ''
+    });
+  });
+
+  function restrictInputLength(maxLength, event, value) {
+    // Always allow backspace
+    if (event.keyCode === 8) {
+      return true;
+    }
+    if (value.toString().length >= maxLength) {
+      event.preventDefault();
+    }
+  }
+
+  $('.spend-page').on('keydown', '.calorie-input', function(event) {
+    restrictInputLength(4, event, $(this).val());
+  });
+});
 </script>

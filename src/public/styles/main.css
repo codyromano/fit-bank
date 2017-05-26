@@ -27,23 +27,6 @@ h1 {
   font-size: 4em;
   display: block;
 }
-.btn {
-  cursor: pointer;
-  -webkit-user-select: none;
-}
-.primary, .secondary {
-  display: block;
-  padding: 1em 1.5em;
-  border-radius: .5em;
-  margin: .5em auto;
-  max-width: 15rem;
-}
-.primary {
-  background-color: #3cd428;
-}
-.secondary {
-  background-color: #bfbfbf;
-}
 .settings {
   color: #eff;
 }
@@ -51,10 +34,35 @@ h1 {
   max-width: 40rem;
   margin: 0 auto;
 }
-button {
-  appearance: none;
-  outline: none;
+.row {
+  flex-wrap: wrap;
+  flex-direction: row;
+  display: flex;
+}
+.row-centered-items {
+  justify-items: center;
+  justify-content: center;
+}
+.spend-page {
+  margin-top: 2rem;
+  padding: 0 0.5rem;
+}
+h2 {
+  font-size: 1.25rem;
+}
+.hidden {
+  display: none;
+}
+.input-wrapper {
+  margin-bottom: 0.5rem;
+}
+.calorie-input {
+  font-size: 3rem;
+  border-radius: 0.25rem;
   border: none;
-  background-color: transparent;
-  cursor: pointer;
+  padding: 0.5rem 0 0.5rem 1rem;
+  color: #555;
+  width: 6ch;
+  text-align: center;
+  margin: 0.75rem 0 1rem 0;
 }

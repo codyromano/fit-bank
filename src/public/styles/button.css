@@ -1,0 +1,32 @@
+button {
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.btn {
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+.primary, .secondary {
+  display: block;
+  padding: 1em 1.5em;
+  border-radius: .5em;
+  margin: .5em auto;
+  max-width: 15rem;
+}
+.primary {
+  background-color: #3cd428;
+}
+.secondary {
+  background-color: #bfbfbf;
+}
+.btn-width-50 {
+  flex: 1;
+  flex-basis: 25%;
+  margin: 0.25rem;
+}
+.calorie-btn {
+  max-width: 5rem;
+}
