@@ -77,7 +77,7 @@ function reset() {
     Reward.dateLastClaimed = null;
     localStorage.setItem('dateLastClaimed', null);
     localStorage.setItem('rewardAmount', Reward.defaultAmount);
-    Balance.render();
+    window.location.reload();
   }
 }
 
