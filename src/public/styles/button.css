@@ -26,6 +26,9 @@ button {
   flex: 1;
   flex-basis: 25%;
   margin: 0.25rem;
+  /* padding: 1rem 0; */
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 .calorie-btn {
   max-width: 5rem;

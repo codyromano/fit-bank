@@ -1,11 +1,11 @@
 <section class="spend-page center-col">
-  <h2 class="spend-headline">What did you eat?</h2>
+  <h2 class="spend-headline">Spend calories on...</h2>
 
-  <div class="row meal-options row-centered-items">
-    <span class="btn primary btn-width-50">Breakfast</span>
-    <span class="btn primary btn-width-50">Lunch</span>
-    <span class="btn primary btn-width-50">Dinner</span>
-    <span class="btn primary btn-width-50">Snack</span>
+  <div class="meal-options">
+    <span class="btn primary">Breakfast</span>
+    <span class="btn primary">Lunch</span>
+    <span class="btn primary">Dinner</span>
+    <span class="btn primary">Snack</span>
   </div>
 
   <div class="calories hidden">
@@ -16,7 +16,7 @@
     </div>
     <div>
       <span class="btn secondary cancel">Cancel</span>
-      <span class="btn primary log-button">Log</span>
+      <span class="btn primary log-button">Spend</span>
     </div>
   </div>
 </section>
@@ -37,7 +37,7 @@ function renderSpendPage(state = {}) {
       $calories.fadeIn(fadeInTime);
       $headline.text(`How many calories?`);
       $('.calorie-input').focus();
-      $('.log-button').text(`Log ${state.mealType}`);
+      $('.log-button').text(`Spend for ${state.mealType}`);
     }, fadeInTime);
   } else {
 
