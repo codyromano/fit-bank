@@ -4,17 +4,17 @@
 </div>
 
 <div class="center-col">
-  <span class="btn primary earn-button daily-reward" onClick="requestReward()">Claim Daily Reward</span>
+  <span class="btn primary earn-button daily-reward" onClick="requestReward()">Deposit Calories</span>
 </div>
 
 <script>
 function renderRewardBtn(Reward) {
-  const btn = document.querySelector('.earn-button');
+  const $btn = $('.earn-button');
 
   if (Reward.isEligible()) {
-    btn.classList.add('daily-reward');
+    $btn.addClass('daily-reward').text('Deposit Calories');
   } else {
-    btn.classList.remove('daily-reward');
+    $btn.removeClass('daily-reward').text('Next deposit tomorrow morning');
   }
 }
 
