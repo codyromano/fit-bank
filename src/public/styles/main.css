@@ -20,8 +20,8 @@ h1 {
   margin: 2rem 0 0 0;
 }
 .stat-wrapper {
-  padding: 1.5em .5em 2em .5em;
-  margin: 1rem 0;
+  /*padding: 1.5em .5em 2em .5em;
+  margin: 1rem 0;*/
 }
 .stat {
   font-size: 4em;
