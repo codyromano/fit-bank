@@ -1,0 +1,26 @@
+.popout {
+  bottom: 5rem;
+  right: -0.1rem;
+  width: 20rem;
+  padding: 1rem;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  border: solid #ccc 0.1rem;
+  transition: right ease 0.5s;
+}
+
+.overlay {
+  position: fixed;
+  background: #fff;
+  color: #000;
+}
+
+.overlay .header {
+  color: rgb(34, 163, 1);
+  font-weight: bold;
+  display: block;
+}
+
+.overlay-hidden {
+  right: -23rem;
+}

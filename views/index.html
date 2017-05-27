@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="./styles/nav-footer.css" type="text/css"/>
   <link rel="stylesheet" href="./styles/data-table.css" type="text/css"/>
   <link rel="stylesheet" href="./styles/earn.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/overlay.css" type="text/css"/>
 
 </head>
 <body>
@@ -22,6 +23,11 @@
 <canvas class="confetti" id="world"></canvas>
 
 <main>
+  <section class="overlay popout overlay-hidden">
+    <div class="header">Calories Transfered!</div>
+    <p>We moved 2,000 calories from your Savings account to your daily limit.</p>
+  </section>
+
   <header class="center-col space-bottom-2x">
     <h1>FitBank</h1>
   </header>
@@ -47,6 +53,40 @@
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+
+  <script>
+$(() => {
+
+  let queue = [];
+  let processing = false;
+
+  const processQueue = () => {
+    const item = queue.shift();
+    const $popout = $('.popout');
+
+    $popout.find('.header').text(item.header);
+    $popout.find('p').text(item.body);
+    $popout.removeClass('overlay-hidden');
+
+    setTimeout(() => {
+      if (queue.length) {
+        processQueue();
+      } else {
+        processing = false;
+        $popout.addClass('overlay-hidden');
+      }
+    }, item.time);
+  };
+
+  window.popout = (header, body, time = 4000) => {
+    queue.push({header, body, time});
+    if (!processing) {
+      processQueue();
+      processing = true;
+    }
+  };
+});
+</script>
 
 <script src="./Db.js"></script>
 <script src="./Stock.js"></script>

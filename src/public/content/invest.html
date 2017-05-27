@@ -23,11 +23,13 @@ function cashOut() {
     return false;
   }
   if (isNaN(amount) || amount === 0) {
-    alert(`Invalid amount`);
+    popout(`Invalid amount`, `Please enter a valid number`);
     return false;
   }
   if (amount > savings) {
-    alert(`Can't deduct ${amount}...you only have ${savings} in Savings.`);
+    popout(`Invalid Transaction`,
+      `Can't deduct ${amount}...you only have ${savings} in Savings.`,
+      5000);
     return false;
   }
   if (!Balance.deductSavings(amount)) {
@@ -35,7 +37,9 @@ function cashOut() {
     return false;
   }
   Balance.add(amount);
-  alert(`Congrats! We moved ${amount} from savings to your current daily limit.`);
+  popout(`Congrats!`,
+    `You moved ${amount} calories from your savings
+    to your current daily limit.`);
   renderConfirmation();
   return true;
 }
@@ -89,7 +93,7 @@ function handleSaveLaterClick() {
   askSaveAmount(Balance.get())
   .catch(function(reason) {
     if (reason) {
-      alert(reason);
+      popout(`Can't save for later`, reason);
     }
   })
   .then(addSavings)

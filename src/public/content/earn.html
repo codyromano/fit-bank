@@ -12,9 +12,11 @@ function renderRewardBtn(Reward) {
   const $btn = $('.earn-button');
 
   if (Reward.isEligible()) {
-    $btn.addClass('daily-reward').text('Deposit Calories');
+    $btn.addClass('daily-reward')
+      .text('Deposit Calories');
   } else {
-    $btn.removeClass('daily-reward').text('Next deposit tomorrow morning');
+    $btn.removeClass('daily-reward')
+      .text('Next deposit tomorrow morning');
   }
 }
 
