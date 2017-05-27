@@ -1,17 +1,114 @@
 <div class="center-col space-bottom-2x">
-  <span class="stat" id="saved-amount">1,230</span>
+  <span class="stat saved-amount">0</span>
   <span class="stat-label">Calories Saved For Later</span>
 </div>
 
 <div class="center-col">
-  <span class="btn primary save-later-btn">Save for Later</span>
-  <span class="btn primary cash-out-btn">Cash Out Savings</span>
+  <span class="btn primary save-later-btn" onClick="handleSaveLaterClick()">Save for Later</span>
+  <span class="btn primary cash-out-btn" onClick="cashOut()">Cash Out Savings</span>
 </div>
 
 <script>
+function cashOut() {
+  const savings = Balance.getSavings();
+
+  if (savings === 0) {
+    alert(`Your Savings Account is empty.`);
+    return false;
+  }
+  const amount = window.prompt(`You have ${savings} in savings. How many do you want to withdraw?`, savings);
+
+  // Request canceled
+  if (amount === null) {
+    return false;
+  }
+  if (isNaN(amount) || amount === 0) {
+    alert(`Invalid amount`);
+    return false;
+  }
+  if (amount > savings) {
+    alert(`Can't deduct ${amount}...you only have ${savings} in Savings.`);
+    return false;
+  }
+  if (!Balance.deductSavings(amount)) {
+    alert(`Sorry, a problem occurred while deducting savings.`);
+    return false;
+  }
+  Balance.add(amount);
+  alert(`Congrats! We moved ${amount} from savings to your current daily limit.`);
+  renderConfirmation();
+  return true;
+}
+
+function askSaveAmount(availableBalance) {
+  const amount = window.prompt(`You have calories ${availableBalance} available today. How many do you want to save?`, availableBalance);
+
+  return new Promise((resolve, reject) => {
+    // The prompt was canceled
+    if (amount === null) {
+      reject();
+    }
+    const parsedNum = parseFloat(amount.trim());
+
+    if (isNaN(parsedNum) || parsedNum === 0) {
+      reject(`Invalid amount`);
+    }
+    if (parsedNum <= availableBalance) {
+      resolve(parsedNum);
+    } else {
+      reject(`No can do...You only have ${availableBalance} calories to save.`);
+    }
+  });
+}
+
+function addSavings(amount) {
+  return new Promise((resolve, reject) => {
+    if (Balance.addSavings(amount)) {
+      resolve(amount);
+    } else {
+      reject('Could not increase savings');
+    }
+  });
+}
+
+function deductBalance(amount) {
+  return new Promise(resolve => {
+    const result = Balance.deduct(amount);
+    resolve(amount);
+  });
+}
+
+function renderConfirmation() {
+  renderSavingsPage({
+    balance: Balance.get(),
+    amountSaved: Balance.getSavings()
+  });
+}
+
+function handleSaveLaterClick() {
+  askSaveAmount(Balance.get())
+  .catch(function(reason) {
+    if (reason) {
+      alert(reason);
+    }
+  })
+  .then(addSavings)
+  .then(deductBalance)
+  .then(renderConfirmation);
+}
+
 function renderSavingsPage(state = {}) {
   const $saveBtn = $('.save-later-btn');
   const $cashOutBtn = $('.cash-out-btn');
+  const $savedInt = $('.saved-amount');
+
+  $savedInt.text( state.amountSaved );
+
+  if (state.balance) {
+    $saveBtn.show();
+  } else {
+    $saveBtn.hide();
+  }
 
   if (state.amountSaved > 0) {
     $cashOutBtn.show();
@@ -20,7 +117,8 @@ function renderSavingsPage(state = {}) {
   }
 }
 renderSavingsPage({
-  amountSaved: 1000
+  balance: Balance.get(),
+  amountSaved: Balance.getSavings()
 });
 </script>
 

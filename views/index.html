@@ -82,6 +82,7 @@ function reset() {
     Reward.dateLastClaimed = null;
     localStorage.setItem('dateLastClaimed', null);
     localStorage.setItem('rewardAmount', Reward.defaultAmount);
+    localStorage.setItem('savings', 0);
     window.location.reload();
   }
 }
