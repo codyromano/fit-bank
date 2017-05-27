@@ -83,6 +83,10 @@ function renderSpendPage(state = {}) {
   }
 }
 
+// Hide the footer while the calorie input field is in focus
+$('.calorie-input').focus(() => $('.nav-footer').hide());
+$('.calorie-input').blur(() => $('.nav-footer').show());
+
 function handleCalorieFormSubmission(event) {
   event.preventDefault();
 
