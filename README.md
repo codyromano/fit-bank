@@ -1,7 +1,5 @@
 # fit-bank
-Eating like an investor
-
-![](https://media.giphy.com/media/3o7bu1hPBFYdPiD3he/giphy.gif)
+![](http://i.imgur.com/Fx05Jhz.gif)
 
 ## Installing
 
