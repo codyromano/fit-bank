@@ -148,7 +148,7 @@ function requestReward() {
     toggleConfetti();
     Reward.claim(Balance);
   } else {
-    alert('You have claimed your calories for today. Come back tomorrow.');
+    popout(`No more calories left`, 'You have claimed your calories for today. Come back tomorrow morning.', 6000);
   }
 }
 

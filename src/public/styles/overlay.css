@@ -6,7 +6,7 @@
   border-top-left-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
   border: solid #ccc 0.1rem;
-  transition: right ease 0.5s;
+  transition: right ease 0.75s;
 }
 
 .overlay {
