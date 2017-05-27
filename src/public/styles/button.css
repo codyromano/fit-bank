@@ -33,3 +33,6 @@ button {
 .calorie-btn {
   max-width: 5rem;
 }
+.btn-inline {
+  display: inline-block;
+}

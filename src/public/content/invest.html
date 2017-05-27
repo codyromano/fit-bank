@@ -1,3 +1,36 @@
+<div class="center-col space-bottom-2x">
+  <span class="stat" id="saved-amount">1,230</span>
+  <span class="stat-label">Calories Saved For Later</span>
+</div>
+
+<div class="center-col">
+  <span class="btn primary save-later-btn">Save for Later</span>
+  <span class="btn primary cash-out-btn">Cash Out Savings</span>
+</div>
+
+<script>
+function renderSavingsPage(state = {}) {
+  const $saveBtn = $('.save-later-btn');
+  const $cashOutBtn = $('.cash-out-btn');
+
+  if (state.amountSaved > 0) {
+    $cashOutBtn.show();
+  } else {
+    $cashOutBtn.hide();
+  }
+}
+renderSavingsPage({
+  amountSaved: 1000
+});
+</script>
+
+<!--
+<div class="center-col space-bottom-2x hidden">
+    <input type="range" max="1000" min="1"/>
+</div>
+-->
+
+<!--
 <section class="data-table">
   <div class="data-table-row">
     <div class="data-table-cell data-table-heading">Stock</div>
@@ -34,5 +67,5 @@
     <div class="data-table-cell">$200</div>
     <div class="data-table-cell"><button>Buy</button></div>
   </div>
-
 </section>
+-->
