@@ -44,11 +44,17 @@ function renderSpendPage(state = {}) {
   const $headline = $('.spend-headline');
   const $spendResult = $('.spend-result');
 
+  const $spendAmountNumber = $('#spend-result-spent');
+  const $caloriesNumber = $('#calories');
+
   const fadeInTime = 1000 / 3;
 
   if (state.caloriesSpent) {
     $calories.fadeOut(fadeInTime);
     $mealOptions.fadeOut(fadeInTime);
+
+    $spendAmountNumber.text(state.spendAmount);
+    $caloriesNumber.text(state.caloriesLeft);
 
     setTimeout(() => {
       $spendResult.fadeIn(fadeInTime);
@@ -80,9 +86,17 @@ function renderSpendPage(state = {}) {
 function handleCalorieFormSubmission(event) {
   event.preventDefault();
 
-  renderSpendPage({
-    caloriesSpent: $('.calorie-input').val()
-  });
+  const caloriesSpent = parseFloat(
+    $('.calorie-input').val()
+  );
+  if (Balance && !isNaN(caloriesSpent)) {
+    Balance.deduct(caloriesSpent);
+    renderSpendPage({
+      spendAmount: caloriesSpent,
+      caloriesLeft: Balance.get(),
+      caloriesSpent
+    });
+  }
 }
 
 $('.spend-form').submit(handleCalorieFormSubmission);
