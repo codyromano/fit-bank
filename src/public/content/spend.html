@@ -8,6 +8,18 @@
     <span class="btn primary">Snack</span>
   </div>
 
+  <div class="spend-result hidden">
+    <div class="stat-wrapper center-col space-bottom-2x">
+      <span class="stat" id="spend-result-spent">302</span>
+      <span class="stat-label">Calories Spent</span>
+    </div>
+
+    <div class="stat-wrapper center-col space-bottom-2x">
+      <span class="stat" id="calories">303</span>
+      <span class="stat-label">Calories Left Today</span>
+    </div>
+  </div>
+
   <div class="calories hidden">
     <form class="spend-form">
       <div class="row row-centered-items">
@@ -30,11 +42,23 @@ function renderSpendPage(state = {}) {
   const $mealOptions = $('.meal-options');
   const $calories = $('.calories');
   const $headline = $('.spend-headline');
+  const $spendResult = $('.spend-result');
 
   const fadeInTime = 1000 / 3;
 
-  if (state.mealType && state.mealType.length) {
+  if (state.caloriesSpent) {
+    $calories.fadeOut(fadeInTime);
     $mealOptions.fadeOut(fadeInTime);
+
+    setTimeout(() => {
+      $spendResult.fadeIn(fadeInTime);
+      $headline.text(`Food logged!`);
+    }, fadeInTime);
+
+  } else if (state.mealType && state.mealType.length) {
+    $mealOptions.fadeOut(fadeInTime);
+    $spendResult.fadeOut(fadeInTime);
+
     setTimeout(() => {
       $calories.fadeIn(fadeInTime);
       $headline.text(`How many calories?`);
@@ -44,6 +68,8 @@ function renderSpendPage(state = {}) {
   } else {
 
     $calories.fadeOut(fadeInTime);
+    $spendResult.fadeOut(fadeInTime);
+
     setTimeout(() => {
       $mealOptions.fadeIn(fadeInTime);
       $headline.text(`What did you eat?`);
@@ -53,7 +79,10 @@ function renderSpendPage(state = {}) {
 
 function handleCalorieFormSubmission(event) {
   event.preventDefault();
-  alert('submission');
+
+  renderSpendPage({
+    caloriesSpent: $('.calorie-input').val()
+  });
 }
 
 $('.spend-form').submit(handleCalorieFormSubmission);
