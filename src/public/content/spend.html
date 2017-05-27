@@ -9,15 +9,17 @@
   </div>
 
   <div class="calories hidden">
-    <div class="row row-centered-items">
-      <div class="input-wrapper">
-        <input type="number" class="calorie-input">
+    <form class="spend-form">
+      <div class="row row-centered-items">
+        <div class="input-wrapper">
+          <input type="number" class="calorie-input">
+        </div>
       </div>
-    </div>
-    <div>
-      <span class="btn secondary cancel">Cancel</span>
-      <span class="btn primary log-button">Spend</span>
-    </div>
+      <div>
+        <span class="btn secondary cancel">Cancel</span>
+        <span class="btn primary log-button">Spend</span>
+      </div>
+    </form>
   </div>
 </section>
 
@@ -49,6 +51,13 @@ function renderSpendPage(state = {}) {
   }
 }
 
+function handleCalorieFormSubmission(event) {
+  event.preventDefault();
+  alert('submission');
+}
+
+$('.spend-form').submit(handleCalorieFormSubmission);
+
 $(() => {
   $('.spend-page').on('click', '.meal-options .btn', function() {
     renderSpendPage({
@@ -71,6 +80,8 @@ $(() => {
       event.preventDefault();
     }
   }
+
+  $('.log-button').click(() => $('.spend-form').submit());
 
   $('.spend-page').on('keydown', '.calorie-input', function(event) {
     restrictInputLength(4, event, $(this).val());
