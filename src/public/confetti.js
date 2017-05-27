@@ -123,13 +123,15 @@
   const confettiEl = document.querySelector('.confetti');
 
   window.toggleConfetti = () => {
+    const hiddenClassName = 'invisible';
+
     if (!isPlaying) {
       isPlaying = true;
       step();
-      confettiEl.classList.remove('hidden');
+      confettiEl.classList.remove(hiddenClassName);
 
       setTimeout(() => {
-        confettiEl.classList.add('hidden');
+        confettiEl.classList.add(hiddenClassName);
       }, 3000);
 
       setTimeout(() => {
