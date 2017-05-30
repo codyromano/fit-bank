@@ -59,8 +59,7 @@
   crossorigin="anonymous"></script>
 
   <script>
-$(() => {
-
+  
   let queue = [];
   let processing = false;
 
@@ -89,7 +88,6 @@ $(() => {
       processing = true;
     }
   };
-});
 </script>
 
 <script src="./Events.js"></script>
@@ -123,12 +121,22 @@ function toggleSettingsMenu(show) {
 
 function reset() {
   var confirm = window.confirm("Really want to reset?");
+
+  const storageItems = [
+    'dateLastClaimed',
+    'rewardAmount',
+    'savings',
+    'stars_isObject',
+    'dateLastClaimed',
+    'metric-rewardsClaimed',
+    'metric-totalSpendTransactions',
+    'metric-timesSaved'
+  ];
+
   if (confirm) {
-    Balance.set(0); 
-    Reward.dateLastClaimed = null;
-    localStorage.setItem('dateLastClaimed', null);
-    localStorage.setItem('rewardAmount', Reward.defaultAmount);
-    localStorage.setItem('savings', 0);
+    for (const key of storageItems) {
+      window.localStorage.removeItem(key);
+    }
     window.location.reload();
   }
 }
@@ -189,6 +197,15 @@ $('.nav-footer button').click(function() {
 });
 
 Events.publish('starEarned', 'first-login');
+
+Events.subscribe('starUnlocked', star => {
+  const audio = document.createElement('audio');
+  audio.src = './sound/star.mp3';
+  audio.play();
+
+  popout('Achievement unlocked!', star.about, 5000);
+});
+
 </script>
 
 <script src="/js/webpack-bundle.js"></script>
