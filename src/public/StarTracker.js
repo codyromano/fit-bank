@@ -32,10 +32,12 @@ class StarTracker {
     this.storageKey = 'stars';
     this.stars = Db.get(this.storageKey) || stars;
     console.assert(Array.isArray(this.stars));
+
+    Events.publish('starListChanged', this.getStars());
   }
   onStarListChange() {
     Db.save(this.storageKey, this.stars);
-    // TODO: Publish update 
+    Events.publish('starListChanged', this.getStars());
   }
   getStars() {
     return Object.assign([], this.stars.map(clone));
@@ -53,6 +55,7 @@ class StarTracker {
     const star = this.getStarById(starId);
     if (star) {
       star.locked = false;
+      Events.publish('starUnlocked', clone(star));
       this.onStarListChange();
       return true;
     } else {
@@ -62,3 +65,7 @@ class StarTracker {
 }
 
 const starTracker = new StarTracker(stars);
+
+Events.subscribe('firstDeposit', () => {
+  starTracker.unlock('first-deposit');
+});

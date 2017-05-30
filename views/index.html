@@ -93,6 +93,7 @@ $(() => {
 </script>
 
 <script src="./Events.js"></script>
+<script src="./Metric.js"></script>
 <script src="./Db.js"></script>
 <script src="./Stock.js"></script>
 <script src="./StockFactory.js"></script>
@@ -148,9 +149,18 @@ function spendCalories() {
 }
 
 function requestReward() {
+  const rewardsClaimed = new Metric('rewardsClaimed', 0);
+
   if (Reward.isEligible()) {
+    rewardsClaimed.add(1);
+
     toggleConfetti();
     Reward.claim(Balance);
+
+    if (rewardsClaimed.get() === 1) {
+      Events.publish('firstDeposit');
+    }
+
   } else {
     popout(`No more calories left`, 'You have claimed your calories for today. Come back tomorrow morning.', 6000);
   }
