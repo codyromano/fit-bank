@@ -23,7 +23,7 @@
 <canvas class="confetti" id="world"></canvas>
 
 <main>
-    <button class="rewards" onClick="alert('Achivements section coming soon');">
+    <button class="rewards" onClick="window.location.hash='progress'">
       <span>Rewards</span>
     </button>
 
@@ -95,6 +95,7 @@ $(() => {
 <script src="./Events.js"></script>
 <script src="./Metric.js"></script>
 <script src="./Db.js"></script>
+<script src="/StarTracker.js"></script>
 <script src="./Stock.js"></script>
 <script src="./StockFactory.js"></script>
 <script src="./Reward.js"></script>
@@ -186,6 +187,8 @@ $('.nav-footer button').click(function() {
   const contentName = $(this).attr('id');
   window.location.hash = contentName;
 });
+
+Events.publish('starEarned', 'first-login');
 </script>
 
 <script src="/js/webpack-bundle.js"></script>

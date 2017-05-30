@@ -1,17 +1,24 @@
 class Metric {
   constructor(name, initValue) {
     this.name = name;
-    this.value = Db.get(`metric-${name}`);
 
-    if (this.value === null && !isNaN(initValue)) {
+    const stored = parseFloat(
+      Db.get(`metric-${name}`)
+    );
+
+    if (!isNaN(stored)) {
+      this.value = stored;
+
+    } else if (!isNaN(initValue)) {
       this.value = initValue;
     } else {
+
       throw new TypeError(`Invalid initial value.
         Must be a number.`);
     }
   }
   onMetricChange() {
-    Db.save(`metric-${name}`, this.value);
+    Db.save(`metric-${this.name}`, this.value);
   }
   get() {
     return this.value;

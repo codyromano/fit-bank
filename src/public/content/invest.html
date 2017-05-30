@@ -66,8 +66,14 @@ function askSaveAmount(availableBalance) {
 }
 
 function addSavings(amount) {
+  const timesSavedMetric = new Metric('timesSaved', 0);
+
   return new Promise((resolve, reject) => {
     if (Balance.addSavings(amount)) {
+      timesSavedMetric.add(1);
+      if (timesSavedMetric.get() === 1) {
+        Events.publish('starEarned', 'first-save');
+      }
       resolve(amount);
     } else {
       reject('Could not increase savings');

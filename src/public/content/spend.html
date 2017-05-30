@@ -93,7 +93,16 @@ function handleCalorieFormSubmission(event) {
   const caloriesSpent = parseFloat(
     $('.calorie-input').val()
   );
+
+  // How many times user has pushed spend
+  const totalSpends = new Metric('totalSpendTransactions', 0);
+
   if (Balance && !isNaN(caloriesSpent)) {
+    totalSpends.add(1);
+    if (totalSpends.get() === 1) {
+      Events.publish('starEarned', 'first-spend');
+    }
+
     Balance.deduct(caloriesSpent);
     renderSpendPage({
       spendAmount: caloriesSpent,

@@ -1,5 +1,3 @@
-<script src="/StarTracker.js"></script>
-
 <div class="stat-wrapper center-col">
   <span class="stat stat-percentage" id="totalDone">0</span>
   <span class="stat-label">Total Progress</span>
@@ -22,13 +20,14 @@
 </script>
 
 <script>
-let doneEl = document.getElementById('totalDone');
-
 Events.subscribe('starListChanged', list => {
   const done = list.reduce((total, item) =>
     total + (item.locked ? 0 : 1), 0);
+  const doneEl = document.getElementById('totalDone');
 
-  doneEl.textContent = Math.floor((done / list.length) * 100);
+  if (doneEl) {
+    doneEl.textContent = Math.floor((done / list.length) * 100);
+  }
 });
 
 

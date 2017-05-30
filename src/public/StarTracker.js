@@ -69,3 +69,15 @@ const starTracker = new StarTracker(stars);
 Events.subscribe('firstDeposit', () => {
   starTracker.unlock('first-deposit');
 });
+
+Events.subscribe('starEarned', starId => {
+  const star = starTracker.getStarById(starId);
+
+  if (star && star.locked === true) {
+    starTracker.unlock(starId);
+  } else if (star && star.locked === false) {
+    console.warn(`Star ${starId} already unlocked`);
+  } else {
+    throw new Error(`No star exists with ID ${starId}`);
+  }
+});
