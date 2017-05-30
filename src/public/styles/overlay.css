@@ -18,6 +18,7 @@
 .overlay .header {
   color: rgb(34, 163, 1);
   font-weight: bold;
+  font-size: 1.25rem;
   display: block;
 }
 
