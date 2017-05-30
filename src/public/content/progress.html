@@ -11,28 +11,6 @@
   </div>
 
   <div id="star-rows"></div>
-
-  <div class="data-table-row">
-    <div class="data-table-cell">
-    Deposit calories</div>
-  </div>
-
-  <div class="data-table-row">
-    <div class="data-table-cell">Spend calories on a meal or snack</div>
-  </div>
-
-  <div class="data-table-row">
-    <div class="data-table-cell">Login for the first time</div>
-  </div>
-
-  <div class="data-table-row">
-    <div class="data-table-cell">
-    Save calories for later</div>
-  </div>
-
-  <div class="data-table-row">
-    <div class="data-table-cell">Login 7 days in a row</div>
-  </div>
 </section>
 
 <script type="text/template" id="progress-row-template">
@@ -72,7 +50,7 @@ function renderStars(template, domRoot, stars = []) {
 renderStars(
   document.getElementById('progress-row-template').text,
   document.getElementById('star-rows'),
-  stars
+  starTracker.getStars()
 );
 
 
