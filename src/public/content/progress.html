@@ -1,0 +1,81 @@
+<script src="/StarTracker.js"></script>
+
+<div class="stat-wrapper center-col">
+  <span class="stat stat-percentage">6</span>
+  <span class="stat-label">Total Progress</span>
+</div>
+
+<section class="data-table">
+  <div class="data-table-row">
+    <div class="data-table-cell data-table-heading">Achievements</div>
+  </div>
+
+  <div id="star-rows"></div>
+
+  <div class="data-table-row">
+    <div class="data-table-cell">
+    Deposit calories</div>
+  </div>
+
+  <div class="data-table-row">
+    <div class="data-table-cell">Spend calories on a meal or snack</div>
+  </div>
+
+  <div class="data-table-row">
+    <div class="data-table-cell">Login for the first time</div>
+  </div>
+
+  <div class="data-table-row">
+    <div class="data-table-cell">
+    Save calories for later</div>
+  </div>
+
+  <div class="data-table-row">
+    <div class="data-table-cell">Login 7 days in a row</div>
+  </div>
+</section>
+
+<script type="text/template" id="progress-row-template">
+<div class="data-table-row">
+    <div class="data-table-cell {{unlockedClass}}">
+      {{about}}
+    </div>
+  </div>
+</script>
+
+<script>
+
+function fillVars(template = '', vars = {}) {
+  for (const varName in vars) {
+    const findVarName = new RegExp('{{' + varName + '}}', 'g');
+    template = template.replace(findVarName, vars[varName]);
+  }
+  return template;
+}
+
+function renderStars(template, domRoot, stars = []) {
+  let rows = [];
+  stars.forEach(star => {
+    
+    const row = fillVars(template, {
+      about: star.about,
+      unlockedClass: star.locked ? '' : 'data-table-cell-unlocked'
+    });
+
+    //const row = template.replace('{{about}}', star.about);
+    // data-table-cell-unlocked
+    rows.push(row);
+  });
+  domRoot.innerHTML = rows.join('');
+}
+
+renderStars(
+  document.getElementById('progress-row-template').text,
+  document.getElementById('star-rows'),
+  stars
+);
+
+
+</script>
+
+
