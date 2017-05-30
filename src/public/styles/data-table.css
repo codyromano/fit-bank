@@ -27,16 +27,35 @@
   flex: 1;
   background-color: #fff;
   color: #000;
-  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  padding: 1rem 0.5rem 1rem 3rem;
+  text-align: left;
+  position: relative;
+}
+.data-table-cell::before {
+  content: '';
+  height: 1.25rem;
+  width: 1.25rem;
+  background: url(/images/achievement-locked.png) no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 0.75rem;
+  top: 1rem;
+  opacity: 0.5;
+}
+.data-table-cell-unlocked::before {
+  background-image: url(/images/achievement.png);
+  opacity: 1;
 }
 .data-table-cell + .data-table-cell {
   border-left: solid #ccc 0.1rem;
 }
 .data-table-heading {
   color: #22a301;
-  border-bottom: solid #ccc 0.1rem;
+  border-bottom: solid #eee 0.1rem;
   font-weight: bold;
-  padding-top: 0.5rem;
+}
+.data-table-heading::before {
+  display: none;
 }
 .data-table button {
   background-color: rgba(34, 163, 1, 0.75);

@@ -9,6 +9,7 @@ main {
 }
 body {
   background-color: #22a301;
+  padding-bottom: 3rem;
 }
 main {
   margin: 0 auto;
@@ -81,4 +82,11 @@ fieldset {
 }
 .rewards span {
   display: none;
+}
+.stat-percentage {
+  margin-left: 0.25em;
+}
+.stat-percentage::after {
+  content: '%';
+  font-size: 0.5em;
 }
