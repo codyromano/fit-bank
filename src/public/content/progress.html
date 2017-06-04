@@ -1,14 +1,38 @@
-<div class="stat-wrapper center-col">
+<div class="stat-wrapper center-col space-bottom-2x">
   <span class="stat stat-percentage" id="totalDone">0</span>
   <span class="stat-label">Total Progress</span>
 </div>
 
-<section class="data-table">
+<section class="data-table space-bottom-1x">
   <div class="data-table-row">
     <div class="data-table-cell data-table-heading">Achievements</div>
   </div>
 
   <div id="star-rows"></div>
+</section>
+
+<section class="data-table">
+  <div class="data-table-row">
+    <div class="data-table-cell data-table-heading">Stats</div>
+  </div>
+  <div class="data-table-row">
+    <!--TODO: Add unlocked class -->
+    <div class="data-table-cell data-stat-label">
+      Total days you visited FitBank
+    </div>
+    <div class="data-table-cell data-stat-number">
+      30
+    </div>
+  </div>
+  <div class="data-table-row">
+    <!--TODO: Add unlocked class -->
+    <div class="data-table-cell data-stat-label">
+      Average daily consumption
+    </div>
+    <div class="data-table-cell data-stat-number">
+      20
+    </div>
+  </div>
 </section>
 
 <script type="text/template" id="progress-row-template">
