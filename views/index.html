@@ -53,10 +53,7 @@
   </footer>
 </main>
 
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+<script src="./js/jquery-3.2.1.js"></script>
 
   <script>
   
@@ -105,6 +102,16 @@ Balance.render();
 </script>
 
 <script>
+
+function daysWithMinSavingsBalance(minBalance) {
+  const currentBalance = Balance.getSavings();
+  
+  if (currentBalance <= minBalance) {
+
+  }
+}
+
+
 function renderStocks() {
   const stocks = StockFactory();
   console.log(stocks);
