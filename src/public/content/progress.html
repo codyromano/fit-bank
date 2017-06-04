@@ -65,30 +65,22 @@ function renderStatsTable() {
   table.renderRows([{about: 'about', number: 10303}]);
 }
 
-renderStatsTable();
-
-function renderStars(template, domRoot, stars = []) {
-  let rows = [];
-  stars.forEach(star => {
-    
-    const row = fillVars(template, {
-      about: star.about,
-      unlockedClass: star.locked ? '' : 'data-table-cell-unlocked'
-    });
-
-    //const row = template.replace('{{about}}', star.about);
-    // data-table-cell-unlocked
-    rows.push(row);
+function renderStars() {
+  const stars = starTracker.getStars().map(star => {
+    star.unlockedClass = star.locked ? '' : 'data-table-cell-unlocked';
+    return star;
   });
-  domRoot.innerHTML = rows.join('');
+
+  const table = new TableRenderer({
+    container: document.getElementById('star-rows'),
+    template: document.getElementById('progress-row-template').text
+  });
+
+  table.renderRows(stars);
 }
 
-renderStars(
-  document.getElementById('progress-row-template').text,
-  document.getElementById('star-rows'),
-  starTracker.getStars()
-);
-
+renderStatsTable();
+renderStars();
 
 </script>
 
