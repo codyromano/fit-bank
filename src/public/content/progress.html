@@ -57,12 +57,22 @@ function fillVars(template = '', vars = {}) {
 }
 
 function renderStatsTable() {
+  const metrics = [
+    {
+      about: 'Times you spent calories',
+      name: 'totalSpendTransactions'
+    }
+  ].map(metric => {
+    metric.number = new Metric(metric.name, 0).get();
+    return metric;
+  });
+  
   const table = new TableRenderer({
     container: document.querySelector('#stat-rows'),
     template: document.querySelector('#stat-row-template').innerHTML
   });
 
-  table.renderRows([{about: 'about', number: 10303}]);
+  table.renderRows(metrics);
 }
 
 function renderStars() {
