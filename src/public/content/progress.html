@@ -59,8 +59,16 @@ function fillVars(template = '', vars = {}) {
 function renderStatsTable() {
   const metrics = [
     {
+      about: 'Average calories spent per meal',
+      name: 'averageCalorieExpense'
+    },
+    {
       about: 'Times you spent calories',
       name: 'totalSpendTransactions'
+    },
+    {
+      about: 'Total calories spent',
+      name: 'totalCaloriesSpent'
     }
   ].map(metric => {
     metric.number = new Metric(metric.name, 0).get();
