@@ -15,24 +15,7 @@
   <div class="data-table-row">
     <div class="data-table-cell data-table-heading">Stats</div>
   </div>
-  <div class="data-table-row">
-    <!--TODO: Add unlocked class -->
-    <div class="data-table-cell data-stat-label">
-      Total days you visited FitBank
-    </div>
-    <div class="data-table-cell data-stat-number">
-      30
-    </div>
-  </div>
-  <div class="data-table-row">
-    <!--TODO: Add unlocked class -->
-    <div class="data-table-cell data-stat-label">
-      Average daily consumption
-    </div>
-    <div class="data-table-cell data-stat-number">
-      20
-    </div>
-  </div>
+  <div id="stat-rows"></div>
 </section>
 
 <script type="text/template" id="progress-row-template">
@@ -41,6 +24,17 @@
       {{about}}
     </div>
   </div>
+</script>
+
+<script type="text/template" id="stat-row-template">
+<div class="data-table-row">
+  <div class="data-table-cell data-stat-label">
+    {{about}}
+  </div>
+  <div class="data-table-cell data-stat-number">
+    {{number}}
+  </div>
+</div>
 </script>
 
 <script>
@@ -54,7 +48,6 @@ Events.subscribe('starListChanged', list => {
   }
 });
 
-
 function fillVars(template = '', vars = {}) {
   for (const varName in vars) {
     const findVarName = new RegExp('{{' + varName + '}}', 'g');
@@ -62,6 +55,17 @@ function fillVars(template = '', vars = {}) {
   }
   return template;
 }
+
+function renderStatsTable() {
+  const table = new TableRenderer({
+    container: document.querySelector('#stat-rows'),
+    template: document.querySelector('#stat-row-template').innerHTML
+  });
+
+  table.renderRows([{about: 'about', number: 10303}]);
+}
+
+renderStatsTable();
 
 function renderStars(template, domRoot, stars = []) {
   let rows = [];
