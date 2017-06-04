@@ -94,9 +94,11 @@ function handleCalorieFormSubmission(event) {
     $('.calorie-input').val()
   );
 
+  const metricFactory = new MetricFactory();
+
   // How many times user has pushed spend
-  const totalSpends = new Metric('totalSpendTransactions', 0);
-  const totalSpent = new Metric('totalCaloriesSpent', 0);
+  const totalSpends = metricFactory.create('totalSpendTransactions', 0);
+  const totalSpent = metricFactory.create('totalCaloriesSpent', 0);
 
   const getAverageExpense = (totalSpends, totalSpent) => {
     return totalSpent / Math.max(1, totalSpends);
