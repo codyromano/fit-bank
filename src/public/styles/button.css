@@ -15,6 +15,10 @@ button {
   border-radius: .5em;
   margin: .5em auto;
   max-width: 15rem;
+  color: #fff;
+  text-decoration: none;
+  font-family: Cash, Helvetica;
+  font-size: 1rem;
 }
 .primary {
   background-color: #3cd428;
