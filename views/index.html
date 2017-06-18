@@ -89,9 +89,11 @@
   };
 </script>
 
+<!-- TODO: Manage dependency closure properly using ES6 modules -->
 <script src="./Events.js"></script>
 <script src="./Metric.js"></script>
 <script src="./Db.js"></script>
+<script src="./ChangeLog.js"></script>
 <script src="/StarTracker.js"></script>
 <script src="./Stock.js"></script>
 <script src="./StockFactory.js"></script>
@@ -104,20 +106,6 @@ Balance.render();
 </script>
 
 <script>
-
-function daysWithMinSavingsBalance(minBalance) {
-  const currentBalance = Balance.getSavings();
-  
-  if (currentBalance <= minBalance) {
-
-  }
-}
-
-
-function renderStocks() {
-  const stocks = StockFactory();
-  console.log(stocks);
-}
 
 function toggleSettingsMenu(show) {
   const settings = document.querySelector('.settings-wrapper');
