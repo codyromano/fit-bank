@@ -34,7 +34,7 @@
   content: '';
   height: 1.25rem;
   width: 1.25rem;
-  background: url(/images/achievement-locked.png) no-repeat;
+  background: url(/fit-bank/images/achievement-locked.png) no-repeat;
   background-size: cover;
   position: absolute;
   left: 0.75rem;
@@ -42,7 +42,7 @@
   opacity: 0.5;
 }
 .data-table-cell-unlocked::before {
-  background-image: url(/images/achievement.png);
+  background-image: url(/fit-bank/images/achievement.png);
   opacity: 1;
 }
 .data-table-cell + .data-table-cell {
