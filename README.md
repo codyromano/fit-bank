@@ -13,4 +13,4 @@ Install dependencies and watch JS files for changes:
 
 Open the project in your default browser:
 
-`open "http://localhost:3000"`
+`open "http://localhost:3456/fit-bank/"`
