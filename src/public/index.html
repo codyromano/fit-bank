@@ -8,14 +8,14 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
   <!-- Set up a proper build system. This is kind of ridiculous :) -->
-  <link rel="stylesheet" href="/fit-bank/styles/main.css" type="text/css"/>
-  <link rel="stylesheet" href="/fit-bank/styles/layout.css" type="text/css"/>
-  <link rel="stylesheet" href="/fit-bank/styles/settings.css" type="text/css"/>
-  <link rel="stylesheet" href="/fit-bank/styles/button.css" type="text/css"/>
-  <link rel="stylesheet" href="/fit-bank/styles/nav-footer.css" type="text/css"/>
-  <link rel="stylesheet" href="/fit-bank/styles/data-table.css" type="text/css"/>
-  <link rel="stylesheet" href="/fit-bank/styles/earn.css" type="text/css"/>
-  <link rel="stylesheet" href="/fit-bank/styles/overlay.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/layout.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/settings.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/button.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/nav-footer.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/data-table.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/earn.css" type="text/css"/>
+  <link rel="stylesheet" href="./styles/overlay.css" type="text/css"/>
 
 </head>
 <body>
@@ -53,9 +53,9 @@
   </footer>
 </main>
 
-<script src="/fit-bank/js/jquery-3.2.1.js"></script>
-<script src="/fit-bank/TableRenderer.js"></script>
-<script src="/fit-bank/MetricFactory.js"></script>
+<script src="./js/jquery-3.2.1.js"></script>
+<script src="./TableRenderer.js"></script>
+<script src="./MetricFactory.js"></script>
 
   <script>
   
@@ -90,16 +90,16 @@
 </script>
 
 <!-- TODO: Manage dependency closure properly using ES6 modules -->
-<script src="/fit-bank/Events.js"></script>
-<script src="/fit-bank/Metric.js"></script>
-<script src="/fit-bank/Db.js"></script>
-<script src="/fit-bank/ChangeLog.js"></script>
-<script src="/fit-bank/StarTracker.js"></script>
-<script src="/fit-bank/Stock.js"></script>
-<script src="/fit-bank/StockFactory.js"></script>
-<script src="/fit-bank/Reward.js"></script>
-<script src="/fit-bank/Balance.js"></script>
-<script src="/fit-bank/confetti.js"></script>
+<script src="./Events.js"></script>
+<script src="./Metric.js"></script>
+<script src="./Db.js"></script>
+<script src="./ChangeLog.js"></script>
+<script src="./StarTracker.js"></script>
+<script src="./Stock.js"></script>
+<script src="./StockFactory.js"></script>
+<script src="./Reward.js"></script>
+<script src="./Balance.js"></script>
+<script src="./confetti.js"></script>
 
 <script>
 Balance.render();
@@ -174,7 +174,7 @@ function requestReward() {
 }
 
 function loadContent(contentName) {
-  $(`.page-container`).load(`/fit-bank/content/${contentName}.html`);
+  $(`.page-container`).load(`./content/${contentName}.html`);
 }
 
 loadContent('progress');
@@ -201,8 +201,6 @@ Events.subscribe('starUnlocked', star => {
 });
 
 </script>
-
-<script src="/fit-bank/js/webpack-bundle.js"></script>
 
 </body>
 </html>
